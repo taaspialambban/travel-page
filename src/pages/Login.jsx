@@ -1,6 +1,6 @@
 
 import Navbar from '../Shares/Navbar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaFacebookF } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa6";
 import { useContext, useState } from 'react';
@@ -13,6 +13,8 @@ const Login = () => {
     const {singIn , singInWithGoogle} = useContext(AuthContext)
     const [registerError , setRegisterError] = useState('');
     const [successLogin , setSuccessLogin] = useState('');
+    const location = useLocation();
+
      // Show password state 
      const [showPassword , setShowPassword] = useState(false);
 
@@ -40,7 +42,7 @@ const Login = () => {
             console.log(result.user)
             setSuccessLogin('successfully login');
             e.target.reset()
-            navigate('/')
+            navigate (location?.state ? location.state : '/')
         })
         .catch(error =>{
             console.error(error)
